@@ -33,10 +33,12 @@ var TodoApp = React.createClass({
 	},
 	addNewTodo: function(item){
 		console.log(item);
-		//var newListObj = {id: this.state.todos.length, text: item};
-		//var newTodos = this.state.todos.push(newListObj);
-		
-		//this.setState({todos: newTodos});
+		var newListObj = {id: this.state.todos.length +1, text: item};
+		//var newTodos = ;
+		var todos = this.state.todos.slice()
+		todos.push(newListObj)
+		console.log(newListObj);
+		this.setState({todos: todos});
 	},
 	
 	

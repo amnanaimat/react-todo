@@ -7,11 +7,11 @@ var AddTodo = React.createClass({
 		
 		var str = this.refs.item.value;
 		if(str.length > 0){
-		if(str.match(/^[a-zA-Z]*$/)){
+		
 			this.props.onAddTodo(str);
 			this.refs.item.value = "";
 			
-		}
+		
 		} else {
 			this.refs.item.focus();
 		}
