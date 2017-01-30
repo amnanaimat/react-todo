@@ -22,5 +22,17 @@ describe('TodoApp',()=>{
 		
 		
 	});
+	it('should Call handleToggle proper',()=>{
+		var todoData = {id:11, text: "text Data",done: false};
+		var todoapp = TestUtils.renderIntoDocument(<TodoApp />);
+		todoapp.setState({todos: [todoData]});
+		expect(todoapp.state.todos[0].done).toBe(false);
+		todoapp.handleToggle(todoData.id);
+		expect(todoapp.state.todos[0].done).toBe(true);
+		todoapp.handleToggle(todoData.id);
+		expect(todoapp.state.todos[0].done).toBe(false);
+		
+		
+	});
 	
 });
