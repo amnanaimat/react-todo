@@ -13,5 +13,14 @@ describe('TodoApp',()=>{
 		
 		expect(TodoApp).toExist();
 	});
+	it('should Call addNewTodo Function',()=>{
+		var todoapp = TestUtils.renderIntoDocument(<TodoApp />);
+		todoapp.setState({todos: []});
+		
+		todoapp.addNewTodo("test text");
+		expect(todoapp.state.todos[0].text).toBe("test text");
+		
+		
+	});
 	
 });
