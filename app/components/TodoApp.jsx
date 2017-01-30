@@ -3,6 +3,7 @@ var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
 var TodoSearch = require('TodoSearch');
 var uuId = require('node-uuid');
+var TodoAPI = require('TodoAPI');
 
 
 
@@ -11,30 +12,7 @@ var TodoApp = React.createClass({
 		return {
 			showCompleted: false,
 			showText: "",
-			todos:[
-			{
-				id: uuId(),
-				text: 'Cooking Food',
-				done: true
-			},
-			{
-				id: uuId(),
-				text: 'Cleaning House',
-				done: false
-			},
-			{
-				id: uuId(),
-				text: "Fruits cutting",
-				done: false
-				
-			},
-			{
-				id: uuId(),
-				text:'watxhing drama',
-				done: false
-			}
-			
-			]
+			todos:TodoAPI.getTodos()
 			
 		}
 		
@@ -63,6 +41,10 @@ var TodoApp = React.createClass({
 			todos: [...this.state.todos,
 			{id: uuId(), text: item, done: false}
 			]});
+	},
+	componentDidUpdate:function(){
+		
+		TodoAPI.setTodos(this.state.todos);
 	},
 	
 	
