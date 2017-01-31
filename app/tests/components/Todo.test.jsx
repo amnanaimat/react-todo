@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
+var moment = require('moment');
 var Todo = require('Todo');
 
 
@@ -13,8 +14,8 @@ describe('Todo',()=>{
 		
 		expect(Todo).toExist();
 	});
-	
-	it('should  call OnToggle when todo is clciked',()=>{
+
+	it('should  call OnToggle when todo is clicked',()=>{
 		
 		var todoData = {id:111, text: "text Data",done: false};
 		var spy = expect.createSpy();
