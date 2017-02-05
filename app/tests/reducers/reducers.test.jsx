@@ -22,4 +22,32 @@ describe('showCompeletedReducer',()=>{
       expect(result).toEqual(true);
   });
 });
+
+  describe('addTodoReducer',()=>{
+    it("should add todos",()=>{
+      var action= {
+        type: "ADD_TODO",
+        text:"some text"
+      };
+        var result = reducers.addTodoReducer(df([]),df(action));
+        expect(result.length).toEqual(1);
+        expect(result[0].text).toEqual(action.text);
+    });
+  });
+  describe('addTodoReducer',()=>{
+    it("should toggle todos",()=>{
+      var todos = [{id: 123,
+			text: "action.text",
+			done: true,
+			createdAt: 123,
+			completedAt: 1234}];
+      var action= {
+        type: "TOGGLE_TODO",
+        id: 123
+      };
+        var result = reducers.addTodoReducer(df(todos),df(action));
+        expect(result[0].done).toEqual(false);
+        expect(result[0].completedAt).toEqual(undefined);
+    });
+  });
 });
