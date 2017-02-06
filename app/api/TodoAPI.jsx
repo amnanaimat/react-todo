@@ -5,15 +5,15 @@ module.exports = {
 			localStorage.setItem('todos',JSON.stringify(todos));
 			return todos
 		}
-		
+
 	},
 	getTodos:function(){
-		
+
 		var stringTodos = localStorage.getItem('todos');
 		var todos = [];
 		try{
 			todos = JSON.parse(stringTodos);
-			
+
 		} catch(e){}
 		if($.isArray(todos)){
 			return todos
@@ -30,13 +30,13 @@ module.exports = {
 			return !todo.done
 		}
 		});
-		
+
 		filteredTodos = filteredTodos.filter((todo)=>{
 		var text = todo.text.toLowerCase();
-		
-		return searchText.length === 0 || text.indexOf(searchText)> -1; 
+
+		return searchText.length === 0 || text.indexOf(searchText)> -1;
 		});
-		
+
 		filteredTodos.sort((a,b)=>{
 			if(!a.done && b.done){
 				return -1;
@@ -46,9 +46,9 @@ module.exports = {
 				return 0;
 			}
 		});
-		
+
 		return filteredTodos;
-		
+
 	}
-	
+
 }

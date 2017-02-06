@@ -1,8 +1,7 @@
 var React = require('react');
-//var TodoList = require('TodoList');
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
-var TodoSearch = require('TodoSearch');
+import TodoSearch from 'TodoSearch';
 var uuId = require('node-uuid');
 var moment = require('moment');
 var TodoAPI = require('TodoAPI');
@@ -23,7 +22,7 @@ var TodoApp = React.createClass({
 	onSearchHandler:function(showCompleted,showText){
 		this.setState({
 			showCompleted: showCompleted,
-			showText: showText.toLowerCase()
+			searchText: showText.toLowerCase()
 		})
 		console.log(showCompleted,showText);
 
@@ -43,7 +42,7 @@ var TodoApp = React.createClass({
 			<div className="row">
 				<div className="columns medium-6 large-4 small-centered">
 					<div className="container">
-					<TodoSearch onSearch={this.onSearchHandler}/>
+					<TodoSearch />
 					<TodoList/>
 					<AddTodo/>
 
