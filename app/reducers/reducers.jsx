@@ -43,7 +43,9 @@ export var addTodoReducer = (state=[],action)=>{
         done: newDone,
         completedAt: newDone? moment().unix():undefined
       }
-      };
+      } else {
+      return todo;
+      }
 		});
 
 
