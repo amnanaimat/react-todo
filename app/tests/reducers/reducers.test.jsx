@@ -33,6 +33,29 @@ describe('showCompeletedReducer',()=>{
         expect(result.length).toEqual(1);
         expect(result[0].text).toEqual(action.text);
     });
+
+    it("should add todos in bulk",()=>{
+    var todos = [{
+      id: 1,
+      text: 'Do something',
+      completed: false,
+      completedAt: undefined,
+      createdAt: 500
+    }, {
+      id: 2,
+      text: 'Check mail',
+      completed: false,
+      completedAt: undefined,
+      createdAt: 500
+    }];
+    var action= {
+      type: "ADD_TODOS",
+      todos: todos
+    };
+        var result = reducers.addTodoReducer(df([]),df(action));
+        expect(result.length).toEqual(2);
+        expect(result[0]).toEqual(todos[0]);
+    });
   });
   describe('addTodoReducer',()=>{
     it("should toggle todos",()=>{

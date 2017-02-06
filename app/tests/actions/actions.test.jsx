@@ -25,6 +25,28 @@ var action= {
   var result = Action.addTodo(action.text);
   expect(result).toEqual(action);
 });
+it('should generate ADD_TODOS action',()=>{
+
+var todos = [{
+  id: 1,
+  text: 'Do something',
+  completed: false,
+  completedAt: undefined,
+  createdAt: 500
+}, {
+  id: 2,
+  text: 'Check mail',
+  completed: false,
+  completedAt: undefined,
+  createdAt: 500
+}];
+var action= {
+  type: "ADD_TODOS",
+  todos: todos
+};
+  var result = Action.addTodos(action.todos);
+  expect(result).toEqual(action);
+});
 
 it('should generate toggleShowCompleted action',()=>{
 var action= {

@@ -6,7 +6,7 @@ var TodoAPI = require('TodoAPI');
 export var TodoList = React.createClass({
   render: function () {
     var {todos, showCompleted, searchText} = this.props;
-		//console.log(todos,showCompleted, searchText);
+		console.log(todos);
 		//console.log(TodoAPI.filterTodos(todos, showCompleted, searchText));
     var renderTodos = () => {
       if (todos.length === 0) {
@@ -32,6 +32,7 @@ export var TodoList = React.createClass({
 
 export default connect(
   (state) => {
+  console.log(state);
     return state;
   }
 )(TodoList);

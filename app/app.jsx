@@ -7,7 +7,7 @@ var TodoApp = require('TodoApp');
 
 var action = require('Action');
 var store = require('configureStore').configure();
-
+var TodoAPI = require('TodoAPI');
 
 
 
@@ -19,14 +19,17 @@ var store = require('configureStore').configure();
   var state = store.getState();
 
 
-  console.log('New state', store.getState());
+  console.log('New state', state);
+  TodoAPI.setTodos(state.todos);
 });
+var initialState = TodoAPI.getTodos();
+store.dispatch(action.addTodos(initialState));
 $(document).foundation();
 //App Custom CSS
 require('style!css!sass!ApplicationCustomStyle');
-
 ReactDOM.render(
   <Provider store={store}>
+
   <TodoApp />
   </Provider>,
   document.getElementById('app')

@@ -22,7 +22,8 @@ module.exports = {
 		}
 	},
 	filterTodos:function(todos,showCompleted,searchText){
-		var filteredTodos =[];
+	console.log(todos);
+		var filteredTodos = todos;
 		filteredTodos = todos.filter((todo)=>{
 			if(showCompleted){
 			return todo;
