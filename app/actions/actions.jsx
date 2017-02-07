@@ -39,6 +39,21 @@ id: todoRef.key
 });
 };
 };
+
+export var startToggleTodo  = (id, done)=>{
+return (dispatch,getState)=>{
+var todoRef = firebaseRef.child(`todos/${id}`);
+var updates = {
+  done,
+  completedAt: done? moment().unix():null
+};
+return todoRef.update(updates).then(()=>{
+  console.log('inside ' , updates);
+  dispatch(updateTodo(id,updates));
+});
+};
+};
+
 export var addTodo = (todo)=>{
 return {
   type: "ADD_TODO",
@@ -47,10 +62,11 @@ return {
 
 };
 
-export var toggleTodo = (id)=>{
+export var updateTodo = (id,updates)=>{
 return {
-  type: "TOGGLE_TODO",
-  id
+  type: "UPDATE_TODO",
+  id,
+  updates
 };
 
 };

@@ -29,15 +29,13 @@ export var addTodoReducer = (state=[],action)=>{
       action.todo
     ];
 
-    case 'TOGGLE_TODO':
+    case 'UPDATE_TODO':
   return state.map((todo)=>{
 			if(todo.id === action.id){
-				var newDone = !todo.done;
-
-			return {...todo,
-        done: newDone,
-        completedAt: newDone? moment().unix():undefined
-      }
+			return {
+      ...todo,
+      ...action.updates
+      };
       } else {
       return todo;
       }

@@ -71,12 +71,14 @@ describe('showCompeletedReducer',()=>{
 			createdAt: 123,
 			completedAt: 1234}];
       var action= {
-        type: "TOGGLE_TODO",
-        id: 123
+        type: "UPDATE_TODO",
+        id: todos[0].id,
+        updates: {done:false,
+        completedAt: null}
       };
         var result = reducers.addTodoReducer(df(todos),df(action));
         expect(result[0].done).toEqual(false);
-        expect(result[0].completedAt).toEqual(undefined);
+        expect(result[0].completedAt).toEqual(action.updates.completedAt);
     });
   });
 });
