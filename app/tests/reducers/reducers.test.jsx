@@ -27,11 +27,17 @@ describe('showCompeletedReducer',()=>{
     it("should add todos",()=>{
       var action= {
         type: "ADD_TODO",
-        text:"some text"
+        todo:{
+        id:'12345',
+        text: "something",
+        done: false,
+        createdAt: 123456
+
+        }
       };
         var result = reducers.addTodoReducer(df([]),df(action));
         expect(result.length).toEqual(1);
-        expect(result[0].text).toEqual(action.text);
+        expect(result[0]).toEqual(action.todo);
     });
 
     it("should add todos in bulk",()=>{

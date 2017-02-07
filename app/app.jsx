@@ -11,9 +11,6 @@ var TodoAPI = require('TodoAPI');
 
 
 
-
-
-
 // Subscribe to changes
  store.subscribe(() => {
   var state = store.getState();

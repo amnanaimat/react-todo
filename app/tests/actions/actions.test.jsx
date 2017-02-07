@@ -1,7 +1,9 @@
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk';
 var expect = require('expect');
 var Action =  require('Action');
 
-
+var createMockStore  = configureMockStore([thunk]);
 describe("Action",()=>{
 
 it('should Exist',()=>{
@@ -16,13 +18,28 @@ var action= {
   var result = Action.setSearchText(action.searchText);
   expect(result).toEqual(action);
 });
+it('should add todos on fireBase',(done)=>{
+  const store = createMockStore({});
+  const todoText = 'my todo';
+  store.dispatch(Action.startAddTodo(todoText)).then(()=>{
+  const actions = store.getActions();
+  expect(actions[0]).toInclude({type: 'ADD_TODO'});
+  done();
+  }).catch(done);
+});
 
 it('should generate ADD_TODO action',()=>{
 var action= {
   type: "ADD_TODO",
-  text: "Dog"
+  todo:{
+  id:'12345',
+  text: "something",
+  done: false,
+  createdAt: 123456
+
+  }
 };
-  var result = Action.addTodo(action.text);
+  var result = Action.addTodo(action.todo);
   expect(result).toEqual(action);
 });
 it('should generate ADD_TODOS action',()=>{

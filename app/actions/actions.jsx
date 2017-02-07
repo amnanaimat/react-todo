@@ -1,3 +1,5 @@
+import firebase ,{firebaseRef} from 'app/firebase/index';
+var moment = require('moment');
 export var setSearchText = (searchText)=>{
 return {
   type: "SET_SEARCH_TEXT",
@@ -18,10 +20,29 @@ return {
 }
 
 };
-export var addTodo = (text)=>{
+export var startAddTodo  =(text)=>{
+return (dispatch,getState)=>{
+var todo = {
+text: text,
+done: false,
+createdAt: moment().unix(),
+completedAt: null
+};
+
+var todoRef = firebaseRef.child('todos').push(todo);
+
+return todoRef.then(()=>{
+dispatch(addTodo({
+...todo,
+id: todoRef.key
+}));
+});
+};
+};
+export var addTodo = (todo)=>{
 return {
   type: "ADD_TODO",
-  text
+  todo
 };
 
 };
