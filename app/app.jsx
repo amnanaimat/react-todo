@@ -12,15 +12,8 @@ var TodoAPI = require('TodoAPI');
 
 
 // Subscribe to changes
- store.subscribe(() => {
-  var state = store.getState();
 
-
-  console.log('New state', state);
-  TodoAPI.setTodos(state.todos);
-});
-var initialState = TodoAPI.getTodos();
-store.dispatch(action.addTodos(initialState));
+store.dispatch(action.startaddTodos());
 $(document).foundation();
 //App Custom CSS
 require('style!css!sass!ApplicationCustomStyle');
