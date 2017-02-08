@@ -2,12 +2,13 @@ import firebase from 'firebase';
 
 try {
 var config = {
-    apiKey: "AIzaSyBsRQvVTwrjaQlXENz8F7CmPMfz018itNk",
-    authDomain: "amna-app-todo.firebaseapp.com",
-    databaseURL: "https://amna-app-todo.firebaseio.com",
-    storageBucket: "amna-app-todo.appspot.com",
-    messagingSenderId: "556688197542"
+    apiKey:process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    storageBucket: process.env.STORAGE_BUCKET,
   };
+  console.log(config);
+  console.log(process.env.NODE_ENV);
   firebase.initializeApp(config);
 
 } catch(e){
