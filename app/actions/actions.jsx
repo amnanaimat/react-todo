@@ -1,4 +1,4 @@
-import firebase ,{firebaseRef} from 'app/firebase/index';
+import firebase ,{firebaseRef,githubProvider} from 'app/firebase/index';
 var moment = require('moment');
 export var setSearchText = (searchText)=>{
 return {
@@ -92,6 +92,29 @@ return {
   type: "UPDATE_TODO",
   id,
   updates
+};
+
+};
+
+export var startLogin = ()=>{
+return (dispatch,getState)=>{
+  return firebase.auth().signInWithPopup(githubProvider).then((result)=>{
+  console.log("Authunticate With", result);
+
+  },(error)=>{
+
+  console.log("Authunticate failed  With", error);
+  })
+
+};
+
+};
+
+export var startLogout = ()=>{
+return (dispatch,getState)=>{
+  return firebase.auth().signOut().then(()=>{
+  console.log('signOut!');
+  });
 };
 
 };
