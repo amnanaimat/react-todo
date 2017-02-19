@@ -10,7 +10,7 @@ var TodoAPI = require('TodoAPI');
 
 
 
-var TodoApp = React.createClass({
+export var TodoApp = React.createClass({
 
 	onLogout(e){
 	e.preventDefault();
@@ -36,7 +36,7 @@ var TodoApp = React.createClass({
 				</div>
 			</div>
 		</div>
- 
+
 		);
 
 	}

@@ -118,3 +118,16 @@ return (dispatch,getState)=>{
 };
 
 };
+
+export var logIn = (uid)=>{
+return {
+type:"LOGIN",
+uid
+};
+};
+export var logOut = ()=>{
+return {
+type:'LOGOUT'
+};
+
+};

@@ -43,7 +43,28 @@ var action= {
   var result = Action.addTodo(action.todo);
   expect(result).toEqual(action);
 });
-it('should generate ADD_TODOS action',()=>{
+it('should generate logIn action Object',()=>{
+var action = {
+type:'LOGIN',
+uid:'123abc'
+};
+
+var res = Action.logIn(action.uid);
+expect(res).toEqual(action);
+
+});
+
+
+it('should generate logOut action Object',()=>{
+var action = {
+type:'LOGOUT'
+};
+
+var res = Action.logOut();
+expect(res).toEqual(action);
+
+});
+it('should generate ADD_TODOS action Object',()=>{
 
 var todos = [{
   id: 1,

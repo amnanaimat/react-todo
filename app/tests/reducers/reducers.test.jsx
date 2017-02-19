@@ -81,4 +81,27 @@ describe('showCompeletedReducer',()=>{
         expect(result[0].completedAt).toEqual(action.updates.completedAt);
     });
   });
+
+
+  describe('authReducer',()=>{
+    it("should store uid on Login",()=>{
+    var action= {
+      type: "LOGIN",
+      uid:'123abd'
+    };
+        var result = reducers.authReducer(df({}),df(action));
+        expect(result.uid).toEqual(action.uid);
+    });
+
+    it("should wipe out  on LogOut",()=>{
+    const authData = {
+    uid: '1233'
+    }
+    const action= {
+      type: "LOGOUT"
+    };
+        const result = reducers.authReducer(df(authData),df(action));
+        expect(result).toEqual({});
+    });
+  });
 });
