@@ -80,6 +80,19 @@ describe('showCompeletedReducer',()=>{
         expect(result[0].done).toEqual(false);
         expect(result[0].completedAt).toEqual(action.updates.completedAt);
     });
+	
+	 it("should wipeout todos on logout6",()=>{
+      var todos = [{id: 123,
+			text: "action.text",
+			done: true,
+			createdAt: 123,
+			completedAt: 1234}];
+      var action= {
+        type: "LOGOUT"
+      };
+        var result = reducers.addTodoReducer(df(todos),df(action));
+        expect(result.length).toEqual(0);
+    });
   });
 
 
