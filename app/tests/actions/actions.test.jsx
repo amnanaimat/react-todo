@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 var expect = require('expect');
-import {firebaseRef} from 'app/firebase/index';
+import firebase,{firebaseRef} from 'app/firebase/index';
 var Action =  require('Action');
 
 var createMockStore  = configureMockStore([thunk]);
@@ -19,15 +19,7 @@ var action= {
   var result = Action.setSearchText(action.searchText);
   expect(result).toEqual(action);
 });
-it('should add todos on fireBase',(done)=>{
-  const store = createMockStore({});
-  const todoText = 'my todo';
-  store.dispatch(Action.startAddTodo(todoText)).then(()=>{
-  const actions = store.getActions();
-  expect(actions[0]).toInclude({type: 'ADD_TODO'});
-  done();
-  }).catch(done);
-});
+
 
 it('should generate ADD_TODO action',()=>{
 var action= {
@@ -106,31 +98,44 @@ var action= {
 
 describe('Tests with todos Firebase',()=>{
 var testTodoRef;
+var uid;
+var todosRef;
+
+
 
 beforeEach((done)=>{
-  var todoRef = firebaseRef.child('todos');
-  todoRef.remove().then(()=>{
-    testTodoRef= firebaseRef.child('todos').push();
-    return  testTodoRef.set({
+	firebase.auth().signInAnonymously().then((user)=>{
+	uid = user.id;
+	todosRef = firebaseRef.child(`users/${uid}/todos`);
+	
+	return todosRef.remove()
+	
+}).then(()=>{
+	testTodoRef = todosRef.push();
+	return  testTodoRef.set({
       text:"Something to do",
       done: false,
       createdAt: 123456,
       completedAt: null
     });
-  }).then(()=>done()).catch();
+}).then(()=>done()).catch();
+	
+	
+	
+ 
   });
 
 
 
 afterEach((done)=>{
-testTodoRef.remove().then(()=>done());
+todosRef.remove().then(()=>done());
 
 
 });
 
 it('should toggle todo and dispatch UPDATE_TODO action',(done)=>{
 
-  const store = createMockStore({});
+  const store = createMockStore({auth:{uid}});
 
   var action = Action.startToggleTodo(testTodoRef.key,true);
   store.dispatch(action).then(()=>{
@@ -149,7 +154,7 @@ it('should toggle todo and dispatch UPDATE_TODO action',(done)=>{
 
 it(' dispatch ADD_TODOS action',(done)=>{
 
-  const store = createMockStore({});
+  const store = createMockStore({auth:{uid}});
 
   var action = Action.startaddTodos();
   store.dispatch(action).then(()=>{
@@ -161,6 +166,16 @@ it(' dispatch ADD_TODOS action',(done)=>{
         done();
 
   },done);
+});
+
+it('should add todos on fireBase',(done)=>{
+  const store =  createMockStore({auth:{uid}});
+  const todoText = 'my todo';
+  store.dispatch(Action.startAddTodo(todoText)).then(()=>{
+  const actions = store.getActions();
+  expect(actions[0]).toInclude({type: 'ADD_TODO'});
+  done();
+  }).catch(done);
 });
 
 
