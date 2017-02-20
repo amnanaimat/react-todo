@@ -15,6 +15,7 @@ import router from 'app/router';
 firebase.auth().onAuthStateChanged((user)=>{
 if(user){
 store.dispatch(action.logIn(user.uid));
+store.dispatch(action.startaddTodos());
 hashHistory.push('/todos');
 } else {
 store.dispatch(action.logOut());
@@ -25,7 +26,7 @@ hashHistory.push('/');
 
 // Subscribe to changes
 
-store.dispatch(action.startaddTodos());
+
 $(document).foundation();
 //App Custom CSS
 require('style!css!sass!ApplicationCustomStyle');
